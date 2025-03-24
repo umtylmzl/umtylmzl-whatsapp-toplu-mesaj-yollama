@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>WhatsApp Mesaj Gönderici</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container" id="main-container">
+        <header>
+            <h1><i class="fab fa-whatsapp"></i> WhatsApp Mesaj Gönderici</h1>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="single">Tek Mesaj</button>
+            <button class="tab-btn" data-tab="bulk">Toplu Mesaj</button>
+        </div>
+        
+        <div class="tab-content active" id="single">
+            <form id="single-form">
+                <div class="form-group">
+                    <label for="phone">Telefon Numarası:</label>
+                    <div class="input-with-button">
+                        <input type="text" id="phone" placeholder="Örn: 905xxxxxxxxx (Başında + olmadan)">
+                        <button type="button" id="select-contact-btn" class="btn-secondary"><i class="fas fa-address-book"></i> Kişi Seç</button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Mesaj:</label>
+                    <textarea id="message" placeholder="Göndermek istediğiniz mesajı yazın..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="repeat">Tekrar Sayısı:</label>
+                    <input type="number" id="repeat" min="1" value="1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="wait-time">Mesaj Gönderme Süresi (saniye):</label>
+                    <input type="number" id="wait-time" min="1" value="3">
+                </div>
+                
+                <div class="form-group">
+                    <label for="close-time">İşlem Sonrası Tarayıcı Kapatma Süresi (saniye):</label>
+                    <input type="number" id="close-time" min="1" value="10">
+                </div>
+                
+                <button type="submit" id="send-btn" class="btn">Mesaj Gönder</button>
+            </form>
+        </div>
+        
+        <div class="tab-content" id="bulk">
+            <form id="bulk-form">
+                <div class="form-group">
+                    <label>Alıcılar:</label>
+                    <div class="bulk-recipients-options">
+                        <div class="option-item">
+                            <input type="radio" id="option-csv" name="recipients-option" value="csv" checked>
+                            <label for="option-csv">CSV Dosyası Yükle</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" id="option-contacts" name="recipients-option" value="contacts">
+                            <label for="option-contacts">Rehberden Seç</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="csv-option" class="option-content">
+                    <div class="form-group">
+                        <label for="csv-file">CSV Dosyası:</label>
+                        <div class="file-input-container">
+                            <input type="file" id="csv-file" accept=".csv">
+                            <label for="csv-file" class="file-label">Dosya Seç</label>
+                            <span id="file-name">Dosya seçilmedi</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="contacts-option" class="option-content" style="display: none;">
+                    <div class="form-group">
+                        <button type="button" id="bulk-select-contact-btn" class="btn-secondary"><i class="fas fa-address-book"></i> Rehberden Kişi Seç</button>
+                        <p class="info-text">Rehberden seçilen kişilere toplu mesaj göndermek için tıklayın.</p>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="default-message">Varsayılan Mesaj:</label>
+                    <textarea id="default-message" placeholder="CSV'de mesaj belirtilmemişse kullanılacak varsayılan mesaj..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bulk-repeat">Tekrar Sayısı:</label>
+                    <input type="number" id="bulk-repeat" min="1" value="1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bulk-wait-time">Mesaj Gönderme Süresi (saniye):</label>
+                    <input type="number" id="bulk-wait-time" min="1" value="3">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bulk-close-time">İşlem Sonrası Tarayıcı Kapatma Süresi (saniye):</label>
+                    <input type="number" id="bulk-close-time" min="1" value="10">
+                </div>
+                
+                <button type="submit" id="bulk-send-btn" class="btn">Toplu Mesaj Gönder</button>
+            </form>
+        </div>
+        
+        <div class="preview-container">
+            <h3>Alıcı Önizleme</h3>
+            <div id="recipients-preview" class="preview">
+                <p class="empty-message">Henüz alıcı eklenmedi.</p>
+            </div>
+        </div>
+        
+        <div id="status" class="status">
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="status-text"></p>
+            
+            <!-- Kontrol Butonları -->
+            <div class="control-buttons" style="display: none;">
+                <button id="pause-btn" class="control-btn"><i class="fas fa-pause"></i> Durdur</button>
+                <button id="resume-btn" class="control-btn" style="display: none;"><i class="fas fa-play"></i> Devam Et</button>
+                <button id="stop-btn" class="control-btn"><i class="fas fa-stop"></i> İptal Et</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- İşlem Tamamlandı Sayfası -->
+    <div class="container" id="completion-container" style="display: none;">
+        <div class="completion-content">
+            <div class="completion-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>İşlem Tamamlandı!</h2>
+            <p id="completion-message">Tüm mesajlar başarıyla gönderildi.</p>
+            <div class="completion-stats">
+                <div class="stat">
+                    <span class="stat-label">Başarılı:</span>
+                    <span class="stat-value" id="success-count">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Başarısız:</span>
+                    <span class="stat-value" id="failed-count">0</span>
+                </div>
+            </div>
+            <button id="new-message-btn" class="btn">Yeni Mesaj Gönder</button>
+        </div>
+    </div>
+    
+    <!-- Kişi Seçme Modalı -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>WhatsApp Kişileriniz</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="contact-import-section">
+                    <h3>Rehber Dosyası Yükle</h3>
+                    <p class="info-text">Gerçek kişilerinizi görmek için rehber dosyanızı yükleyin:</p>
+                    <div class="file-input-container">
+                        <input type="file" id="contacts-file" accept=".csv,.vcf">
+                        <label for="contacts-file" class="file-label">Rehber Dosyası Seç</label>
+                        <span id="contacts-file-name">Dosya seçilmedi</span>
+                    </div>
+                    <div class="import-buttons">
+                        <button id="import-contacts-btn" class="btn-secondary"><i class="fas fa-file-import"></i> Rehberi İçe Aktar</button>
+                    </div>
+                    <div class="divider">
+                        <span>veya</span>
+                    </div>
+                    <button id="show-sample-contacts-btn" class="btn-secondary"><i class="fas fa-users"></i> Örnek Kişileri Göster</button>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" id="contact-search" placeholder="Kişi ara...">
+                </div>
+                <div id="contact-list" class="contact-list">
+                    <p class="loading-message">Kişi listesi yükleniyor...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="refresh-contacts-btn" class="btn-secondary"><i class="fas fa-sync-alt"></i> Kişileri Yenile</button>
+                <button id="select-contact-confirm-btn" class="btn">Kişiyi Seç</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

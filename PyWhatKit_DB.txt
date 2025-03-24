@@ -1,0 +1,65 @@
+Date: 11/3/2025
+Time: 23:35
+Phone Number: +905309520466
+Message: Merhaba Ali! Bu bir test mesajıdır. (1)
+--------------------
+Date: 11/3/2025
+Time: 23:36
+Phone Number: +905309520466
+Message: Merhaba Ali! Bu bir test mesajıdır. (2)
+--------------------
+Date: 11/3/2025
+Time: 23:58
+Phone Number: +905309520466
+Message: deeneme
+--------------------
+Date: 12/3/2025
+Time: 0:11
+Phone Number: +905309520466
+Message: demee (1/10)
+--------------------
+Date: 12/3/2025
+Time: 0:11
+Phone Number: +905309520466
+Message: demee (2/10)
+--------------------
+Date: 12/3/2025
+Time: 0:12
+Phone Number: +905309520466
+Message: demee (3/10)
+--------------------
+Date: 12/3/2025
+Time: 0:12
+Phone Number: +905309520466
+Message: demee (4/10)
+--------------------
+Date: 12/3/2025
+Time: 0:12
+Phone Number: +905309520466
+Message: demee (5/10)
+--------------------
+Date: 12/3/2025
+Time: 0:12
+Phone Number: +905309520466
+Message: demee (6/10)
+--------------------
+Date: 12/3/2025
+Time: 0:13
+Phone Number: +905309520466
+Message: demee (7/10)
+--------------------
+Date: 12/3/2025
+Time: 0:13
+Phone Number: +905309520466
+Message: demee (8/10)
+--------------------
+Date: 12/3/2025
+Time: 0:13
+Phone Number: +905309520466
+Message: demee (9/10)
+--------------------
+Date: 12/3/2025
+Time: 0:13
+Phone Number: +905309520466
+Message: demee (10/10)
+--------------------

@@ -69,4 +69,12 @@ phone,message
 
 - Eğer mesaj gönderilmiyorsa, WhatsApp Web'e giriş yaptığınızdan emin olun.
 - Tarayıcı otomatik olarak kapanmıyorsa, manuel olarak kapatabilirsiniz.
-- CSV dosyasında hata alıyorsanız, dosya formatının doğru olduğundan emin olun. 
+- CSV dosyasında hata alıyorsanız, dosya formatının doğru olduğundan emin olun.
+
+![wp1](https://github.com/user-attachments/assets/b82c7fc0-e4d3-4971-a015-b362890f886f)
+![wp2](https://github.com/user-attachments/assets/983b4dcf-2c16-4367-ba1c-9d58e8455da6)
+
+
+
+
+
